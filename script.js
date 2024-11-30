@@ -133,3 +133,37 @@ function validateForm(event) {
 
 // Add this to any contact forms you create later
 // document.querySelector('form').addEventListener('submit', validateForm);
+
+// Security Key Functionality
+const securityKey = 'pranav2050'; // You can change this to any key you want
+const unlockButton = document.getElementById('unlockButton');
+const securityInput = document.getElementById('securityKey');
+const maskedElements = document.querySelectorAll('.masked-info');
+
+function revealInformation() {
+    const enteredKey = securityInput.value;
+    if (enteredKey === securityKey) {
+        maskedElements.forEach(element => {
+            element.textContent = element.dataset.real;
+            element.classList.add('revealed');
+        });
+        // Show success message
+        alert('Information unlocked successfully!');
+    } else {
+        // Show error message
+        alert('Incorrect security key. Please try again.');
+        securityInput.value = '';
+    }
+}
+
+unlockButton.addEventListener('click', revealInformation);
+securityInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        revealInformation();
+    }
+});
+
+// Clear security input when page loads
+window.addEventListener('load', () => {
+    securityInput.value = '';
+});
