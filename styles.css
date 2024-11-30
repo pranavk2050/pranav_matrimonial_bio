@@ -613,6 +613,42 @@ section {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Social Media Links */
+.social-links {
+    margin-top: 1.5rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    background-color: #f5f5f5;
+}
+
+.social-icon:hover {
+    color: var(--accent-color);
+    background-color: #f0f0f0;
+}
+
+.social-icon i {
+    font-size: 1.5rem;
+}
+
+.social-icon span {
+    font-weight: 500;
+}
+
 /* Footer */
 footer {
     background-color: var(--secondary-color);
