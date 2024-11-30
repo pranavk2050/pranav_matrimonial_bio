@@ -208,6 +208,34 @@ section {
     margin-bottom: 1rem;
 }
 
+.contact-section {
+    padding: 2rem;
+    background-color: var(--section-bg);
+    border-radius: var(--border-radius);
+    margin: 2rem auto;
+    box-shadow: var(--box-shadow);
+    animation: fadeIn 0.8s ease-out;
+    max-width: 1200px;
+}
+
+.contact-section .info-grid {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.contact-section .info-tile {
+    flex: 0 1 600px;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.contact-section .info-value {
+    font-size: 1.1em;
+}
+
 /* Horoscope Section */
 .horoscope-section {
     padding: 4rem 2rem;
