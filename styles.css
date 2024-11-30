@@ -401,173 +401,115 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .info-grid {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-
-    .hero-section {
-        padding: 5rem 1rem;
-    }
-
-    .profile-card h1 {
-        font-size: 2rem;
-    }
-
-    .profile-card .tagline {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .horoscope-section {
-        padding: 2rem 1rem;
-    }
-
-    .info-tile {
-        padding: 1.5rem;
-    }
-
-    .hero-section {
-        padding: 4rem 1rem;
-    }
-
-    .profile-card h1 {
-        font-size: 1.8rem;
-    }
-
-    .profile-card .tagline {
-        font-size: 1rem;
-    }
-
-    .profile-image {
-        width: 150px;
-        height: 150px;
-    }
-}
-
-@media (max-width: 768px) {
-    .mobile-menu-button {
-        display: block;
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        font-size: 1.5rem;
-        border-radius: var(--border-radius);
-        cursor: pointer;
-        z-index: 1001;
-        transition: all 0.3s ease;
-    }
-
-    .mobile-menu-button:hover {
-        background: var(--secondary-color);
-    }
-
-    .nav-content {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background: white;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        padding: 1rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .nav-content.show {
-        display: flex;
-    }
-
-    .nav-item {
-        width: 100%;
-        text-align: center;
-        padding: 1rem;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .nav-item:last-child {
-        border-bottom: none;
-    }
-
-    .info-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 0.5rem;
-    }
-
-    .profile-image {
-        width: 150px;
-        height: 150px;
+    /* General Layout */
+    body {
+        font-size: 14px;
     }
 
     section {
-        padding: 2rem 1rem;
+        padding: 1rem !important;
     }
 
-    .hero-section {
-        padding: 4rem 1rem 2rem 1rem;
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
 
-    .profile-card {
-        margin: 0 1rem;
-        padding: 1.5rem;
+    /* Info Grid Layout */
+    .info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        padding: 0.5rem !important;
     }
 
     .info-tile {
-        padding: 1.5rem;
+        padding: 1rem !important;
     }
 
-    h1 {
-        font-size: 1.8rem;
+    /* Profile Card */
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
     }
 
-    h2 {
+    .profile-image img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile-info h1 {
         font-size: 1.5rem;
-        margin-bottom: 1.5rem;
     }
 
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    /* Navigation */
+    .nav-content {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+
+    .nav-item {
+        padding: 0.5rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Social Icons */
+    .social-icons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .social-icon {
+        justify-content: center;
+    }
+
+    /* Contact Section */
+    .contact-section .info-tile {
+        padding: 1rem !important;
+    }
+
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .info-label {
+        font-size: 0.9rem;
+    }
+
+    .info-value {
+        font-size: 1rem;
+    }
+
+    /* Birth Chart */
+    .birth-chart-image {
+        max-width: 90%;
     }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
-    .profile-image {
+    body {
+        font-size: 13px;
+    }
+
+    .profile-image img {
         width: 120px;
         height: 120px;
     }
 
     .info-tile {
-        padding: 1rem;
+        margin: 0 !important;
     }
 
-    h1 {
-        font-size: 1.5rem;
+    .social-icon {
+        padding: 0.5rem;
     }
 
-    h2 {
-        font-size: 1.3rem;
-    }
-
-    .hero-section {
-        padding: 3rem 0.5rem 1.5rem 0.5rem;
-    }
-
-    .profile-card {
-        margin: 0 0.5rem;
-        padding: 1rem;
-    }
-
-    .nav-item {
-        padding: 0.8rem;
-        font-size: 0.9rem;
+    .social-icon i {
+        font-size: 1.25rem;
     }
 }
 
