@@ -6,14 +6,14 @@ const initializeMobileMenu = () => {
     // Create mobile menu button if it doesn't exist
     if (!document.querySelector('.mobile-menu-button')) {
         const menuButton = document.createElement('button');
-        menuButton.innerHTML = '☰';
+        menuButton.innerHTML = '&#9776;';
         menuButton.className = 'mobile-menu-button';
         
         // Toggle menu on button click
         menuButton.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent event from bubbling up
             navContent.classList.toggle('show');
-            menuButton.innerHTML = navContent.classList.contains('show') ? '✕' : '☰';
+            menuButton.innerHTML = navContent.classList.contains('show') ? '&#10006;' : '&#9776;';
         });
 
         nav.insertBefore(menuButton, navContent);
@@ -25,7 +25,7 @@ const initializeMobileMenu = () => {
             navContent.classList.remove('show');
             const menuButton = document.querySelector('.mobile-menu-button');
             if (menuButton) {
-                menuButton.innerHTML = '☰';
+                menuButton.innerHTML = '&#9776;';
             }
         }
     });
@@ -38,7 +38,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
         const menuButton = document.querySelector('.mobile-menu-button');
         navContent.classList.remove('show');
         if (menuButton) {
-            menuButton.innerHTML = '☰';
+            menuButton.innerHTML = '&#9776;';
         }
     });
 });
@@ -51,27 +51,74 @@ const mobileMenuButton = document.querySelector('.mobile-menu-button');
 const navContent = document.querySelector('.nav-content');
 const navItems = document.querySelectorAll('.nav-item');
 
-// Toggle menu
-mobileMenuButton.addEventListener('click', () => {
+function toggleMobileMenu() {
+    mobileMenuButton.classList.toggle('active');
     navContent.classList.toggle('show');
-    document.body.style.overflow = navContent.classList.contains('show') ? 'hidden' : '';
+    document.body.classList.toggle('menu-open');
+}
+
+// Toggle menu on button click
+mobileMenuButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileMenu();
 });
 
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('nav') && navContent.classList.contains('show')) {
-        navContent.classList.remove('show');
-        document.body.style.overflow = '';
+        toggleMobileMenu();
     }
 });
 
-// Close menu when clicking on a nav item
+// Close menu when clicking nav items
 navItems.forEach(item => {
     item.addEventListener('click', () => {
-        navContent.classList.remove('show');
-        document.body.style.overflow = '';
+        if (window.innerWidth <= 768) {
+            toggleMobileMenu();
+        }
     });
 });
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && navContent.classList.contains('show')) {
+        toggleMobileMenu();
+    }
+});
+
+// Update active nav item on scroll
+function updateActiveNavItem() {
+    const scrollPosition = window.scrollY;
+    const sections = document.querySelectorAll('section');
+    const offset = 100; // Offset to trigger active state earlier
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - offset;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navItem = document.querySelector(`.nav-item[href="#${sectionId}"]`);
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            navItems.forEach(item => item.classList.remove('active'));
+            navItem?.classList.add('active');
+        }
+    });
+}
+
+// Update active nav item on scroll with throttling
+let isScrolling = false;
+window.addEventListener('scroll', () => {
+    if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+            updateActiveNavItem();
+            isScrolling = false;
+        });
+        isScrolling = true;
+    }
+});
+
+// Initialize active nav item on page load
+document.addEventListener('DOMContentLoaded', updateActiveNavItem);
 
 // Update active nav item on scroll
 window.addEventListener('scroll', () => {
@@ -133,24 +180,70 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Handle window resize
-window.addEventListener('resize', () => {
-    const navContent = document.querySelector('.nav-content');
-    const menuButton = document.querySelector('.mobile-menu-button');
-    
-    if (window.innerWidth > 768) {
-        navContent.style.display = 'flex';
-        if (menuButton) {
-            menuButton.style.display = 'none';
+// Security Key Functionality
+const securityKey = 'pranav2050';
+const modal = document.getElementById('securityModal');
+const closeModal = document.querySelector('.close-modal');
+const unlockButton = document.getElementById('unlockButton');
+const securityInput = document.getElementById('securityKey');
+const maskedElements = document.querySelectorAll('.masked-info');
+let isUnlocked = false;
+
+// Show modal when clicking on masked info
+maskedElements.forEach(element => {
+    element.addEventListener('click', () => {
+        if (!isUnlocked) {
+            modal.style.display = 'block';
+            securityInput.focus();
         }
-    } else {
-        if (menuButton) {
-            menuButton.style.display = 'block';
-        }
-        if (!navContent.classList.contains('show')) {
-            navContent.style.display = 'none';
-        }
+    });
+});
+
+// Close modal when clicking on X
+closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    securityInput.value = '';
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        securityInput.value = '';
     }
+});
+
+function revealInformation() {
+    const enteredKey = securityInput.value;
+    if (enteredKey === securityKey) {
+        maskedElements.forEach(element => {
+            element.textContent = element.dataset.real;
+            element.classList.add('revealed');
+            element.style.cursor = 'text';
+        });
+        isUnlocked = true;
+        modal.style.display = 'none';
+        // Remove the modal from DOM since it's no longer needed
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    } else {
+        alert('Incorrect security key. Please try again.');
+        securityInput.value = '';
+    }
+}
+
+unlockButton.addEventListener('click', revealInformation);
+securityInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        revealInformation();
+    }
+});
+
+// Clear security input when page loads
+window.addEventListener('load', () => {
+    securityInput.value = '';
+    isUnlocked = false;
 });
 
 // Form validation for contact form (if added later)
@@ -178,37 +271,3 @@ function validateForm(event) {
 
 // Add this to any contact forms you create later
 // document.querySelector('form').addEventListener('submit', validateForm);
-
-// Security Key Functionality
-const securityKey = 'pranav2050'; // You can change this to any key you want
-const unlockButton = document.getElementById('unlockButton');
-const securityInput = document.getElementById('securityKey');
-const maskedElements = document.querySelectorAll('.masked-info');
-
-function revealInformation() {
-    const enteredKey = securityInput.value;
-    if (enteredKey === securityKey) {
-        maskedElements.forEach(element => {
-            element.textContent = element.dataset.real;
-            element.classList.add('revealed');
-        });
-        // Show success message
-        alert('Information unlocked successfully!');
-    } else {
-        // Show error message
-        alert('Incorrect security key. Please try again.');
-        securityInput.value = '';
-    }
-}
-
-unlockButton.addEventListener('click', revealInformation);
-securityInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        revealInformation();
-    }
-});
-
-// Clear security input when page loads
-window.addEventListener('load', () => {
-    securityInput.value = '';
-});

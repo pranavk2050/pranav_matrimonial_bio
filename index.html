@@ -25,10 +25,6 @@
                 <a href="#contact" class="nav-item">Contact</a>
             </div>
         </nav>
-        <div class="security-key-section">
-            <input type="password" id="securityKey" placeholder="Enter security key" class="security-input">
-            <button id="unlockButton" class="unlock-button">Unlock Details</button>
-        </div>
     </header>
 
     <main>
@@ -280,8 +276,20 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Pranav Dnyaneshwar Kulkarni - Matrimonial Profile</p>
+        <p>&copy; 2024 Pranav Dnyaneshwar Kulkarni. All rights reserved.</p>
     </footer>
+
+    <!-- Security Key Modal -->
+    <div id="securityModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Enter Security Key</h3>
+            <div class="security-key-section">
+                <input type="password" id="securityKey" placeholder="Enter security key" class="security-input">
+                <button id="unlockButton" class="unlock-button">Unlock Details</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
