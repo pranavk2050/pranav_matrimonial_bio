@@ -51,7 +51,13 @@ const mobileMenuButton = document.querySelector('.mobile-menu-button');
 const navContent = document.querySelector('.nav-content');
 const navItems = document.querySelectorAll('.nav-item');
 
-function toggleMobileMenu() {
+function toggleMobileMenu(forceClose = false) {
+    if (forceClose) {
+        mobileMenuButton.classList.remove('active');
+        navContent.classList.remove('show');
+        document.body.classList.remove('menu-open');
+        return;
+    }
     mobileMenuButton.classList.toggle('active');
     navContent.classList.toggle('show');
     document.body.classList.toggle('menu-open');
@@ -66,23 +72,40 @@ mobileMenuButton.addEventListener('click', (e) => {
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('nav') && navContent.classList.contains('show')) {
-        toggleMobileMenu();
+        toggleMobileMenu(true);
     }
 });
 
 // Close menu when clicking nav items
 navItems.forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
-            toggleMobileMenu();
+            e.preventDefault(); // Prevent default to handle scroll manually
+            const targetId = item.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            // Close menu first
+            toggleMobileMenu(true);
+            
+            // Then scroll to section after a small delay
+            setTimeout(() => {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update URL without triggering scroll
+                history.pushState(null, '', targetId);
+                
+                // Update active state
+                navItems.forEach(navItem => navItem.classList.remove('active'));
+                item.classList.add('active');
+            }, 300); // Match this with your CSS transition time
         }
     });
 });
 
 // Handle window resize
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && navContent.classList.contains('show')) {
-        toggleMobileMenu();
+    if (window.innerWidth > 768) {
+        toggleMobileMenu(true);
     }
 });
 
