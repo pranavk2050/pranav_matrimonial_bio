@@ -177,6 +177,19 @@ section {
 .info-value {
     color: #34495e;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-item .masked-info {
+    display: inline-block;
+}
+
+.year-info {
+    margin-top: 0.25rem;
+    color: var(--secondary-color);
+    font-size: 0.95em;
 }
 
 .section-title {
