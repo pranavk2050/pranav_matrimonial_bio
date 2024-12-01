@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Security Key Functionality
-const securityKey = 'pranav2050';
+const securityKey = 'pranav';
 const modal = document.getElementById('securityModal');
 const closeModal = document.querySelector('.close-modal');
 const unlockButton = document.getElementById('unlockButton');
