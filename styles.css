@@ -981,3 +981,36 @@ footer {
         padding: 2rem 0.5rem;
     }
 }
+
+/* Notification Banner */
+.notification-banner {
+    background-color: #f8f9fa;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 12px 20px;
+    margin: 15px auto;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--box-shadow);
+}
+
+.notification-banner i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.notification-banner p {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .notification-banner {
+        padding: 10px 15px;
+        margin: 10px auto;
+        font-size: 0.9rem;
+    }
+}
