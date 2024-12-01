@@ -253,28 +253,41 @@ section {
     overflow: hidden;
     border: 4px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
 }
 
 .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 @media (max-width: 768px) {
     .profile-image {
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
         margin: 0 auto 1.2rem;
+        border-width: 3px;
     }
 }
 
 @media (max-width: 480px) {
     .profile-image {
-        width: 150px;
-        height: 150px;
+        width: 140px;
+        height: 140px;
         margin: 0 auto 1rem;
+    }
+    
+    .profile-image img {
+        object-position: center 20%;
     }
 }
 
