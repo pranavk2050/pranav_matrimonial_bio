@@ -984,33 +984,42 @@ footer {
 
 /* Notification Banner */
 .notification-banner {
-    background-color: #f8f9fa;
-    border: 1px solid var(--primary-color);
+    background-color: #e8f0fe;
+    border: 2px solid var(--primary-color);
     border-radius: var(--border-radius);
-    padding: 12px 20px;
-    margin: 15px auto;
-    max-width: 90%;
+    padding: 15px 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
     display: flex;
     align-items: center;
     gap: 12px;
     box-shadow: var(--box-shadow);
+    position: relative;
+    z-index: 100;
 }
 
 .notification-banner i {
     color: var(--primary-color);
     font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
 .notification-banner p {
     margin: 0;
     color: var(--secondary-color);
-    font-size: 0.95rem;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
     .notification-banner {
-        padding: 10px 15px;
-        margin: 10px auto;
+        width: 95%;
+        padding: 12px 15px;
+        margin: 15px auto;
+    }
+    
+    .notification-banner p {
         font-size: 0.9rem;
     }
 }
